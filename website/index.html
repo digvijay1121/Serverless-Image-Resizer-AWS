@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Serverless Image Resizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glows">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
+    
+    <main class="container">
+        <header class="hero">
+            <h1>🖼️ AWS Serverless <span>Image Resizer</span></h1>
+            <p>Instantly scale and optimize images powered by Amazon S3, AWS Lambda & Pillow</p>
+        </header>
+
+        <section class="glass-card main-card">
+            <div id="dropZone" class="drop-zone">
+                <input type="file" id="fileInput" accept="image/*" hidden>
+                <div class="upload-icon-wrapper">
+                    <div class="upload-icon">☁️</div>
+                </div>
+                <h2>Drag & Drop Image</h2>
+                <p>or click to browse your files</p>
+                <span class="limit">PNG • JPG • WEBP • Max 100 MB</span>
+                <button id="browseBtn" type="button" class="btn-primary">Browse Image</button>
+            </div>
+
+            <div id="progressContainer" class="hidden">
+                <div class="progress-header">
+                    <span>Uploading to S3...</span>
+                    <span id="progressLabel">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <p id="uploadSpeed" class="speed-text">Speed : -- MB/s</p>
+            </div>
+
+            <div id="spinner" class="spinner hidden">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+            
+            <div id="successBox" class="success alert-box hidden">✅ Image Resized Successfully</div>
+            <div id="errorBox" class="error alert-box hidden"></div>
+        </section>
+
+        <section id="previewSection" class="preview hidden">
+            <div class="glass-card image-card">
+                <h3>Original Image</h3>
+                <div class="img-wrapper">
+                    <img id="originalImage" alt="Original">
+                </div>
+                <div class="info-box">
+                    <div class="info-row"><span>📄 Name</span><span id="originalName">-</span></div>
+                    <div class="info-row"><span>📦 Size</span><span id="originalSize">-</span></div>
+                    <div class="info-row"><span>📐 Resolution</span><span id="originalResolution">-</span></div>
+                </div>
+            </div>
+
+            <div class="glass-card image-card">
+                <h3>Resized Image</h3>
+                <div class="img-wrapper">
+                    <img id="resizedImage" alt="Resized">
+                </div>
+                <div class="info-box">
+                    <div class="info-row"><span>📦 Size</span><span id="resizedSize">-</span></div>
+                    <div class="info-row"><span>📐 Resolution</span><span id="resizedResolution">300 × 300</span></div>
+                    <div class="info-row"><span>📉 Compression</span><span id="compressionRatio">-</span></div>
+                </div>
+                <a id="downloadBtn" class="download-btn hidden" download>⬇ Download Image</a>
+            </div>
+        </section>
+
+        <section id="statsCard" class="stats hidden">
+            <div class="glass-card stat">
+                <h4>Space Saved</h4>
+                <p id="savedSpace">-</p>
+            </div>
+            <div class="glass-card stat">
+                <h4>Processing Time</h4>
+                <p id="processingTime">-</p>
+            </div>
+        </section>
+
+        <section id="actionButtons" class="actions hidden">
+            <button id="uploadAnother" class="btn-secondary">Upload Another Image</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
